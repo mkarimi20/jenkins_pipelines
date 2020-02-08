@@ -1,5 +1,8 @@
 node {
-    properties([parameters([choice(choices: ['golden_image', 'tower', 'elk', 'nagios', 'gitlab', 'nexus', 'vault'], description: 'What tool would you like to build ', name: 'TOOL_TO_PROVISION'), choice(choices: ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2'], description: 'choose a region', name: 'REGION_AMI')])])
+    properties([parameters([choice(choices: ['golden_image', 'tower', 'elk', 'nagios', 'gitlab', 'nexus', 'vault'], 
+    text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),
+    description: 'What tool would you like to build ', name: 'TOOL_TO_PROVISION'), choice(choices: ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2'], 
+    description: 'choose a region', name: 'REGION_AMI')])])
     stage("pull repo"){
         git 'https://github.com/farrukh90/packer'
 
