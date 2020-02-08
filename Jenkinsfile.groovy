@@ -22,6 +22,6 @@ cc: '',
 from: '', 
 replyTo: '', 
 subject: 'Golden ami has been build', 
-to: "mkarimidevops@gmail.com"
+to: "${EMAIL_TO_SEND}"
     }
 }
