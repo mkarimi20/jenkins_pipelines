@@ -1,5 +1,6 @@
 node {
     stage("pull repo"){
+        echo "Hello"
 
     }
      stage("build image"){
