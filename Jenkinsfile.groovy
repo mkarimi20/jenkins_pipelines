@@ -6,13 +6,13 @@ node {
     }
      stage("build image"){
          sh "packer version"
-         sh "packer build -var region=${REGION_AMI} tools/jenkins_example.json"
+         //sh "packer build -var region=${REGION_AMI} tools/jenkins_example.json"
     }
      stage("send notification to slack"){
         slackSend channel: 'nagios_alerts', message: 'Golden_ami has been created'
     }
      stage("send email"){
         mail bcc: '', body: '''Hi, 
-Please see $REGION_AMI for your requested golden_AMI''', cc: '', from: '', replyTo: '', subject: 'Golden ami has been build', to: 'mkarimidevops@gmail.com'
+Please see ${REGION_AMI} for your requested golden_AMI''', cc: '', from: '', replyTo: '', subject: 'Golden ami has been build', to: 'mkarimidevops@gmail.com'
     }
 }
