@@ -21,14 +21,14 @@ node {
             'eu-west-2'
             ], 
             description: 'Please choose a region', name: 'AMI_REGION')])])
-            
+
     stage("pull repo"){
         git 'https://github.com/farrukh90/packer'
 
     }
      stage("build image"){
          sh "packer version"
-         sh "packer build -var region=${REGION_AMI} tools/${TOOL_TO_PROVISION}.json"
+         sh "packer build -var region=${AMI_REGION} tools/${TOOL_TO_PROVISION}.json"
     }
      stage("send notification to slack"){
         slackSend channel: 'nagios_alerts', message: "${TOOL_TO_PROVISION} has been created"
@@ -36,7 +36,7 @@ node {
      stage("send email"){
         mail bcc: '', 
         body: 
-        "Hi, Please see ${REGION_AMI} for your requested golden_AMI", 
+        "Hi, Please see ${AMI_REGION} for your requested golden_AMI", 
 cc: '', 
 from: '', 
 replyTo: '', 
