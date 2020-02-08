@@ -7,7 +7,7 @@ node {
     }
      stage("build image"){
          sh "packer version"
-         //sh "packer build -var region=${REGION_AMI} tools/${TOOL_TO_PROVISION}.json"
+         sh "packer build -var region=${REGION_AMI} tools/${TOOL_TO_PROVISION}.json"
     }
      stage("send notification to slack"){
         //slackSend channel: 'nagios_alerts', message: "${TOOL_TO_PROVISION} has been created"
