@@ -8,7 +8,7 @@ node {
         sh "unzip terraform_0.12.19_linux_amd64.zip"
         sh "./terraform version"
         sh "chmod +x terraform"
-        sh "mv terraform terraform-12"
+        sh "mv terraform* terraform-12"
         sh "mv terraform-12 /sbin/"
     }
 
