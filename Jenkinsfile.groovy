@@ -10,7 +10,7 @@ node {
          sh "packer build -var region=${REGION_AMI} tools/${TOOL_TO_PROVISION}.json"
     }
      stage("send notification to slack"){
-        //slackSend channel: 'nagios_alerts', message: "${TOOL_TO_PROVISION} has been created"
+        slackSend channel: 'nagios_alerts', message: "${TOOL_TO_PROVISION} has been created"
     }
      stage("send email"){
         mail bcc: '', 
