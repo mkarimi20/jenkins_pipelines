@@ -1,8 +1,6 @@
 node {
-    properties(
-        [
+    properties([
         buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '3')), 
-            
         parameters([
         choice(choices: [
             'golden_ami', 
@@ -26,25 +24,23 @@ node {
             ], 
             description: 'Please choose a region', name: 'AMI_REGION')])])
 
-    stage("pull repo"){
-        git 'https://github.com/farrukh90/packer'
-
+    stage("Pull Repo"){
+        git 'https://github.com/farrukh90/packer.git'
     }
-     stage("build image"){
-         sh "packer version"
-         sh "packer build -var region=${AMI_REGION} tools/${TOOL_TO_PROVISION}.json"
+    stage("Build Image"){
+        sh "packer version"
+        //sh "packer  build -var region=${AMI_REGION} tools/${TOOL_TO_PROVISION}.json"
     }
-     stage("send notification to slack"){
-        slackSend channel: 'nagios_alerts', message: "${TOOL_TO_PROVISION} has been created"
+    stage("Send Notification to Slack"){
+        slackSend channel: 'nagios_alerts', message: "${TOOL_TO_PROVISION} has been built"
     }
-     stage("send email"){
+    stage("Send Email"){
         mail bcc: '', 
-        body: 
-        "Hi, Please see ${AMI_REGION} for your requested golden_AMI", 
-cc: '', 
-from: '', 
-replyTo: '', 
-subject: 'Golden ami has been build', 
-to: "${EMAIL_TO_SEND}"
+        body: "Hello, Your AMI is ready in ${AMI_REGION} Thanks", 
+        cc: '', 
+        from: '', 
+        replyTo: '', 
+        subject: "${TOOL_TO_PROVISION} has been built", 
+        to: "${EMAIL_TO_SEND}"
     }
 }
