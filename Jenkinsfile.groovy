@@ -1,5 +1,6 @@
 node {
-    properties([parameters([choice(choices: ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2'], description: 'Please select region', name: 'REGION_AMI')])])
+    properties([parameters([choice(choices: ['golden_ami', 'tower', 'elk', 'nagios', 'gitlab', 'nexus', 'vault'], description: 'What tool would you like to build ', name: 'TOOL_TO_PROVISION'), choice(choices: ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2'], description: 'choose a region', name: 'REGION_AMI')])])
+
     stage("pull repo"){
         git 'https://github.com/farrukh90/packer'
 
