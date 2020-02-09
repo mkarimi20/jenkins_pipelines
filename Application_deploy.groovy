@@ -71,11 +71,11 @@ node {
 	}
      stage("Send Email"){
         mail bcc: '', 
-        body: "Hello, Your AMI is ready in ${AMI_REGION} Thanks", 
+        body: "Hello, Your AMI is ready in some Thanks", 
         cc: '', 
         from: '', 
         replyTo: '', 
-        subject: "${TOOL_TO_PROVISION} has been built", 
+        subject: "mo has been built", 
         to: "${EMAIL_TO_SEND}"
     }
 }
