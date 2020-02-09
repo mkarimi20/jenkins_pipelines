@@ -14,6 +14,7 @@ node {
         'version/0.9'], 
 	description: 'Which version of the app should I deploy? ', 
 	name: 'Version'), 
+    text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),
 	choice(choices: 
 	[
 		'bastion.ops-work.net', 
@@ -22,6 +23,8 @@ node {
 		'prod1.acirrustech.com'], 
 	description: 'Please provide an environment to build the application', 
 	name: 'ENVIR')])])
+
+
 	stage("Stage1"){
 		timestamps {
 			ws {
