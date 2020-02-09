@@ -18,7 +18,7 @@ node {
 		'prod1.acirrustech.com'], 
 	description: 'Please provide an environment to build the application', 
 	name: 'ENVIR')])])
-    
+
 	stage("Stage1"){
 		timestamps {
 			ws {
@@ -30,9 +30,9 @@ node {
 		timestamps {
 			ws{
 				sh '''
-					ssh centos@${ENVIR} sudo yum install epel-release -y
-					ssh centos@${ENVIR} sudo yum install python-pip -y 
-					ssh centos@${ENVIR} sudo pip install Flask
+					ssh myjenkins@${ENVIR} sudo yum install epel-release -y
+					ssh myjenkins@${ENVIR} sudo yum install python-pip -y 
+					ssh myjenkins@${ENVIR} sudo pip install Flask
 					'''
 		}
 	}
@@ -41,7 +41,7 @@ node {
 		timestamps {
 			ws {
 				sh '''
-					scp -r * centos@${ENVIR}:/tmp
+					scp -r * myjenkins@${ENVIR}:/tmp
 					'''
 		}
 	}
@@ -50,7 +50,7 @@ node {
 		timestamps {
 			ws {
 				sh '''
-					ssh centos@${ENVIR} nohup python /tmp/artemis.py  &
+					ssh myjenkins@${ENVIR} nohup python /tmp/artemis.py  &
 					'''
 		}
 	}
