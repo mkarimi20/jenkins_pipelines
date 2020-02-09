@@ -1,7 +1,7 @@
 node {
 	properties(
 		[parameters(
-        text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),xs
+        text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),
 		[choice(choices: 
 		[
 		'version/0.1', 
