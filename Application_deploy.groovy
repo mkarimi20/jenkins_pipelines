@@ -69,13 +69,13 @@ node {
 			}
 		}
 	}
-     stage("Send Email"){
-        mail bcc: '', 
+     //stage("Send Email"){
+       // mail bcc: '', 
         body: "Hello, Your AMI is ready in some Thanks", 
         cc: '', 
         from: '', 
         replyTo: '', 
         subject: "mo has been built", 
-        to: "${EMAIL_TO_SEND}"
+        //to: "${EMAIL_TO_SEND}"
     }
 }
