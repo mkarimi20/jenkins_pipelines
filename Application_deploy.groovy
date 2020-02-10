@@ -14,7 +14,7 @@ node {
 	choice(choices: 
 	[
 		'bastion.ops-work.net', 
-		'qbastion.ops-work1.net', 
+		'prod1.ops-work.net', 
 		'bastion.ops-work2.net', 
 		'bastion.ops-work2.net'], 
 	description: 'Please provide an environment to build the application', 
