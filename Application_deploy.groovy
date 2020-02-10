@@ -1,36 +1,6 @@
 node {
-	properties(
-		[parameters(
-		[choice(choices: 
-		[
-		'version/0.1', 
-		'version/0.2', 
-		'version/0.3', 
-		'version/0.4', 
-		'version/0.5',
-        'version/0.6',
-        'version/0.7',
-        'version/0.8',
-        'version/0.9',
-        'version/0.10'], 
-	description: 'Which version of the app should I deploy? ', 
-    text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),
-	name: 'Version'), 
-	choice(choices: 
-	[
-		'bastion.ops-work.net', 
-		'qa1.acirrustech.com', 
-		'stage1.acirrustech.com', 
-		'prod1.acirrustech.com'], 
-	description: 'Please provide an environment to build the application', 
-	name: 'ENVIR')])])
-	stage("Stage1"){
-		timestamps {
-			ws {
-				checkout([$class: 'GitSCM', branches: [[name: '${Version}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/fuchicorp/artemis.git']]])
-		}
-	}
-}
+	
+    properties([[$class: 'JiraProjectProperty'], parameters([choice(choices: ['bastion.ops-work.net', 'bastion.ops-work.net1', 'bastion.ops-work.net2', 'bastion.ops-work.net4'], description: 'Please see select env. ', name: 'ENVIR'), choice(choices: ['version/0.1 ', 'version/0.2 ', 'version/0.3 ', 'version/0.4', 'version/0.5', 'version/0.6', 'version/0.7', 'version/0.8', 'version/0.9', 'version/0.10'], description: 'Please select the version', name: 'VERSION'), string(defaultValue: 'Dummy@gmail.com', description: 'Please added the email.', name: 'RECEPIANT', trim: false)])])
 	stage("Install Prerequisites"){
 		timestamps {
 			ws{
@@ -70,12 +40,12 @@ node {
 	}
        stage("Send Email"){
         mail bcc: '', 
-        body: "Hello, Your AMI is ready in ${AMI_REGION} Thanks", 
+        body: "Hello, Your AMI is ready in nothing Thanks", 
         cc: '', 
         from: 'mkarimidevops@gmail.com', 
         replyTo: '', 
-        subject: "${TOOL_TO_PROVISION} has been built", 
-        to: "${EMAIL_TO_SEND}"
+        subject: "somegood has been built", 
+        to: "${RECEPIANT}"
     }
 }
 }
