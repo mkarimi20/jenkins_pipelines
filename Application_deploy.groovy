@@ -13,10 +13,10 @@ node {
     text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),
 	choice(choices: 
 	[
-		'dev1.huseyinakten.net', 
-		'qa1.huseyinakten.net', 
-		'stage1.huseyinakten.net', 
-		'prod1.huseyinakten.net'], 
+		'bastion.ops-work.net', 
+		'qbastion.ops-work1.net', 
+		'bastion.ops-work2.net', 
+		'bastion.ops-work2.net'], 
 	description: 'Please provide an environment to build the application', 
 	name: 'ENVIR')])])
 	
