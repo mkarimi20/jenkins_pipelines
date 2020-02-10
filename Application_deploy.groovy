@@ -1,4 +1,3 @@
-node {
 	properties(
 		[parameters(
 		[choice(choices: 
@@ -13,7 +12,8 @@ node {
         'version/0.8',
         'version/0.9'], 
 	description: 'Which version of the app should I deploy? ', 
-	name: 'Version'),
+	name: 'Version'), 
+    text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),
 	choice(choices: 
 	[
 		'bastion.ops-work.net', 
@@ -68,4 +68,13 @@ node {
 			}
 		}
 	}
+     stage("Send Email"){
+       mail bcc: '', 
+        body: "Hello, Your AMI is ready in some Thanks", 
+        cc: '', 
+        from: 'karimi.m20@gmail.com', 
+        replyTo: '', 
+        subject: "mo has been built", 
+        to: "${EMAIL_TO_SEND}"
+    }
 }
