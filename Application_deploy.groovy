@@ -1,6 +1,32 @@
 node {
+	properties(
+		[parameters(
+		[choice(choices: 
+		[
+		'version/0.1', 
+		'version/0.2', 
+		'version/0.3', 
+		'version/0.4', 
+		'version/0.5'], 
+	description: 'Which version of the app should I deploy? ', 
+	name: 'Version'), 
+    text(defaultValue: 'dummy@gmail.com', description: 'Please provide email(s) for notifications. Use , for multiple emails', name: 'EMAIL_TO_SEND'),
+	choice(choices: 
+	[
+		'dev1.huseyinakten.net', 
+		'qa1.huseyinakten.net', 
+		'stage1.huseyinakten.net', 
+		'prod1.huseyinakten.net'], 
+	description: 'Please provide an environment to build the application', 
+	name: 'ENVIR')])])
 	
-    properties([[$class: 'JiraProjectProperty'], parameters([choice(choices: ['bastion.ops-work.net', 'bastion.ops-work.net1', 'bastion.ops-work.net2', 'bastion.ops-work.net4'], description: 'Please see select env. ', name: 'ENVIR'), choice(choices: ['version/0.1 ', 'version/0.2 ', 'version/0.3 ', 'version/0.4', 'version/0.5', 'version/0.6', 'version/0.7', 'version/0.8', 'version/0.9', 'version/0.10'], description: 'Please select the version', name: 'VERSION'), string(defaultValue: 'Dummy@gmail.com', description: 'Please added the email.', name: 'RECEPIANT', trim: false)])])
+	stage("Stage1"){
+		timestamps {
+			ws {
+				checkout([$class: 'GitSCM', branches: [[name: '${Version}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/fuchicorp/artemis.git']]])
+		}
+	}
+}
 	stage("Install Prerequisites"){
 		timestamps {
 			ws{
@@ -38,14 +64,13 @@ node {
 			}
 		}
 	}
-       stage("Send Email"){
-        mail bcc: '', 
-        body: "Hello, Your AMI is ready in nothing Thanks", 
-        cc: '', 
-        from: 'mkarimidevops@gmail.com', 
-        replyTo: '', 
-        subject: "somegood has been built", 
-        to: "${RECEPIANT}"
+    stage("Send Email"){
+    mail bcc: '', 
+    body: "Hello, your artemis app is deployed to ${ENVIR}", 
+    cc: '', 
+    from: 'mkarimidevops@gmail.com', 
+    replyTo: '', 
+    subject: "Artemis ${Version} has been deployed", 
+    to: "${EMAIL_TO_SEND}"
     }
-}
 }
