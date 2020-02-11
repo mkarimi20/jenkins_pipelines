@@ -71,6 +71,6 @@ node {
     from: 'mkarimidevops@gmail.com', 
     replyTo: '', 
     subject: "Artemis ${Version} has been deployed", 
-    to: "${EMAIL_TO_SEND}"
+    to: "${karimi.m20@gmail.com}"
     }
 }
